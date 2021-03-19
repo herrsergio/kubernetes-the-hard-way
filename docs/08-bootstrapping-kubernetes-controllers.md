@@ -261,7 +261,7 @@ etcd-2               Healthy   {"health":"true"}
 Test the nginx HTTP health check proxy:
 
 ```
-curl -H "Host: kubernetes.default.svc.cluster.local" -i http://127.0.0.1/healthz
+curl -k -H "Host: kubernetes.default.svc.cluster.local" -i https://127.0.0.1:6443/healthz
 ```
 
 ```
