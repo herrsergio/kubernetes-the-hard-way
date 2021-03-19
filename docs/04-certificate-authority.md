@@ -9,8 +9,6 @@ In this section you will provision a Certificate Authority that can be used to g
 Generate the CA configuration file, certificate, and private key:
 
 ```
-{
-
 cat > ca-config.json <<EOF
 {
   "signing": {
@@ -67,8 +65,6 @@ In this section you will generate client and server certificates for each Kubern
 Generate the `admin` client certificate and private key:
 
 ```
-{
-
 cat > admin-csr.json <<EOF
 {
   "CN": "admin",
@@ -95,7 +91,6 @@ cfssl gencert \
   -profile=kubernetes \
   admin-csr.json | cfssljson -bare admin
 
-}
 ```
 
 Results:
@@ -164,8 +159,6 @@ worker-2.pem
 Generate the `kube-controller-manager` client certificate and private key:
 
 ```
-{
-
 cat > kube-controller-manager-csr.json <<EOF
 {
   "CN": "system:kube-controller-manager",
@@ -192,7 +185,6 @@ cfssl gencert \
   -profile=kubernetes \
   kube-controller-manager-csr.json | cfssljson -bare kube-controller-manager
 
-}
 ```
 
 Results:
@@ -208,8 +200,6 @@ kube-controller-manager.pem
 Generate the `kube-proxy` client certificate and private key:
 
 ```
-{
-
 cat > kube-proxy-csr.json <<EOF
 {
   "CN": "system:kube-proxy",
@@ -236,7 +226,6 @@ cfssl gencert \
   -profile=kubernetes \
   kube-proxy-csr.json | cfssljson -bare kube-proxy
 
-}
 ```
 
 Results:
@@ -251,8 +240,6 @@ kube-proxy.pem
 Generate the `kube-scheduler` client certificate and private key:
 
 ```
-{
-
 cat > kube-scheduler-csr.json <<EOF
 {
   "CN": "system:kube-scheduler",
@@ -278,8 +265,6 @@ cfssl gencert \
   -config=ca-config.json \
   -profile=kubernetes \
   kube-scheduler-csr.json | cfssljson -bare kube-scheduler
-
-}
 ```
 
 Results:
@@ -297,8 +282,6 @@ The `kubernetes-the-hard-way` static IP address will be included in the list of 
 Generate the Kubernetes API Server certificate and private key:
 
 ```
-{
-
 KUBERNETES_PUBLIC_ADDRESS=$(gcloud compute addresses describe kubernetes-the-hard-way \
   --region $(gcloud config get-value compute/region) \
   --format 'value(address)')
@@ -332,7 +315,6 @@ cfssl gencert \
   -profile=kubernetes \
   kubernetes-csr.json | cfssljson -bare kubernetes
 
-}
 ```
 
 > The Kubernetes API server is automatically assigned the `kubernetes` internal dns name, which will be linked to the first IP address (`10.32.0.1`) from the address range (`10.32.0.0/24`) reserved for internal cluster services during the [control plane bootstrapping](08-bootstrapping-kubernetes-controllers.md#configure-the-kubernetes-api-server) lab.
@@ -351,8 +333,6 @@ The Kubernetes Controller Manager leverages a key pair to generate and sign serv
 Generate the `service-account` certificate and private key:
 
 ```
-{
-
 cat > service-account-csr.json <<EOF
 {
   "CN": "service-accounts",
@@ -379,7 +359,6 @@ cfssl gencert \
   -profile=kubernetes \
   service-account-csr.json | cfssljson -bare service-account
 
-}
 ```
 
 Results:
