@@ -11,7 +11,7 @@ Each kubeconfig requires a Kubernetes API Server to connect to. To support high 
 Generate a kubeconfig file suitable for authenticating as the `admin` user:
 
 ```
-{
+
   KUBERNETES_PUBLIC_ADDRESS=$(gcloud compute addresses describe kubernetes-the-hard-way \
     --region $(gcloud config get-value compute/region) \
     --format 'value(address)')
@@ -30,7 +30,7 @@ Generate a kubeconfig file suitable for authenticating as the `admin` user:
     --user=admin
 
   kubectl config use-context kubernetes-the-hard-way
-}
+
 ```
 
 ## Verification
