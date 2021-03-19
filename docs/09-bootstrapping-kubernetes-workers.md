@@ -19,10 +19,10 @@ gcloud compute ssh worker-0
 Install the OS dependencies:
 
 ```
-{
+
   sudo apt-get update
   sudo apt-get -y install socat conntrack ipset
-}
+
 ```
 
 > The socat binary enables support for the `kubectl port-forward` command.
@@ -37,7 +37,7 @@ Verify if swap is enabled:
 sudo swapon --show
 ```
 
-If output is empthy then swap is not enabled. If swap is enabled run the following command to disable swap immediately:
+If output is empty then swap is not enabled. If swap is enabled run the following command to disable swap immediately:
 
 ```
 sudo swapoff -a
@@ -73,7 +73,7 @@ sudo mkdir -p \
 Install the worker binaries:
 
 ```
-{
+
   mkdir containerd
   tar -xvf crictl-v1.18.0-linux-amd64.tar.gz
   tar -xvf containerd-1.3.6-linux-amd64.tar.gz -C containerd
@@ -82,7 +82,7 @@ Install the worker binaries:
   chmod +x crictl kubectl kube-proxy kubelet runc 
   sudo mv crictl kubectl kube-proxy kubelet runc /usr/local/bin/
   sudo mv containerd/bin/* /bin/
-}
+
 ```
 
 ### Configure CNI Networking
@@ -177,11 +177,11 @@ EOF
 ### Configure the Kubelet
 
 ```
-{
+
   sudo mv ${HOSTNAME}-key.pem ${HOSTNAME}.pem /var/lib/kubelet/
   sudo mv ${HOSTNAME}.kubeconfig /var/lib/kubelet/kubeconfig
   sudo mv ca.pem /var/lib/kubernetes/
-}
+
 ```
 
 Create the `kubelet-config.yaml` configuration file:
@@ -281,11 +281,11 @@ EOF
 ### Start the Worker Services
 
 ```
-{
+
   sudo systemctl daemon-reload
   sudo systemctl enable containerd kubelet kube-proxy
   sudo systemctl start containerd kubelet kube-proxy
-}
+
 ```
 
 > Remember to run the above commands on each worker node: `worker-0`, `worker-1`, and `worker-2`.
